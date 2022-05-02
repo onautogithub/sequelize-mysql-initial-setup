@@ -1,14 +1,85 @@
 // Pre-setup Express, JS REST API, mySQL, Sequelize and ES6
 // I made minor modifications to setup the server. I orginzed the files in a certain struction and added additional packages to help me check my code.
 
-  ******************* You can use this project as a start for your server side
-  *****************   Or
-  ***  You can follow the instructions to recreate it.
-
 *Note: 
 *** In my case, I am using mysql ***
 *** I am using Vue version 2.9.6 which I installed globally
 
+  ******************* 
+  ----Option 1 - You can use this project as a start for your server side by cloning this project
+
+  *****************   Or
+  *** Option 2 - You can follow the instructions to recreate it the manual way.
+
+
+***********************************************************************************
+*************************** Intructions for Option 1 - cloning the project.******** 
+
+- Clone the project
+> git clone https://github.com/onautogithub/sequelize-mysql-initial-setup.git
+
+- Rename the sequelize-mysql-initial-setup directory to reflect your project name <yourprojectdirectoryname>
+- Go into your directory. Inside this directory you will find another directory called server.
+- Go into the server directory
+> cd <yourprojectdirectoryname>\server
+- Install the dependencies listed in package.json. We will install the packages locally in the server directory by running npm i
+
+> npm i --save --force
+
+- Install npx (npX) globally:
+> npm i -g npx
+
+- Next, Create the database (mysql schema) using the mysql workbench, or any other mysql tools. You must create the mysql schema (database) manually as described in your config.json configuration file.
+
+# Next step - Create / generate your models
+
+/*
+This is just an example model you can leverage to create your models/tables for your project.
+Important note:
+Only use lower cases and plural for your models (e.g. below: classrooms is the model)
+
+OR Create or Generate Sequelize Models and Migrations
+
+You can use Sequelize-CLI to generate a new Sequelize model.
+
+The following is a command example to create the models for `classrooms`, `students`, `lecturers`, `courses`,
+and `studentcourses`.
+
+npx sequelize model:create --name classrooms --attributes class_name:string
+npx sequelize model:create --name students --attributes classroom_id:integer,student_name:string
+npx sequelize model:create --name lecturers --attributes lecturer_name:string
+npx sequelize model:create --name courses --attributes lecturer_id:integer,course_name:string
+npx sequelize model:create --name studentscourses --attributes student_id:integer,course_id:integer
+
+Edit your models to indicate the associations. Here's an example:
+
+  class classrooms extends Model {
+    static associate(models) {
+      classrooms.hasMany(models.students, {
+        foreignKey: 'classroom_id',
+        as: 'students',
+      });
+    }
+  };
+*/
+
+*************** Create a github project *****************8
+- On github create a repository (<your repository></your>
+- On the command line, move up a directory (to the root of the project)
+> cd ..    (you are no longer in the server directory)
+git init
+git add --all
+git commit -m "first commit"
+git branch -M main
+git remote add origin <link to your repository >
+git push -u origin main
+
+# Next step - go on with your project.
+
+************************ end of Instructions for Option 1 ****************************
+
+
+*************************** Intructions for Option 2 - the manual way.******** 
 - create a directory for the project. In my case: djam-sequelize-many-to-many-Project
 - Install the express-generator globally
 > cd djam-sequelize-many-to-many-Project
@@ -105,10 +176,8 @@ module.exports = {
 
 > npx sequelize init   
 
-The init command direct Sequelize initialization to generate config, models, seeders, and migrations files in the specified directories. 
-
-sequelize init
 That command will create `config/config.json`, `models/index.js`, `migrations`, and `seeders` directories and files. 
+
 -- Next, open and edit `config/config.json` and paste the following in the config file. Make the modifications to reflect your database settings.
 
 ***  We use the same configuration for all the environment because we are using the same machine, server, and database for this tutorial.
@@ -137,6 +206,12 @@ That command will create `config/config.json`, `models/index.js`, `migrations`, 
     "dialect": "postgres"
   }
 }
+
+*** 
+# Note: I experienced issues with the the models->index.js file that sequelize init creates. Make your modifications accordingly or you can copy and past the file from my git repository.
+
+
+# Note: The same goes for the app.js Make your modifications accordingly or you can copy and past the file from my git repository.
 
 ** -- Create the .gitignore file in the server root directory and add the following:
 
@@ -216,4 +291,5 @@ git branch -M main
 git remote add origin https://github.com/onautogithub/djam-sequelize-many-to-many-Project.git
 git push -u origin main
 
--- Now go on with your project
+
+# Next step - go on with your project.
